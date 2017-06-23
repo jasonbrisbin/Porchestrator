@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="ShutdownTasks" role="ScheduleServers">		
+		<scheduledtask name="TAGSDataNotification" action="stop" order="1" />
+		<scheduledtask name="AccountingReportsMover" action="stop" order="2" />
+		<scheduledtask name="CloseBatchesWithNoFailures" action="stop" order="3" />
+		<scheduledtask name="COPYFROMISERIES" action="stop" order="4" />
+		<scheduledtask name="DigitalBatching" action="stop" order="5" />
+		<scheduledtask name="DigitalSignatureRequestNotification" action="stop" order="6" />
+		<scheduledtask name="DocumentTransfertoKofax" action="stop" order="7" />
+		<scheduledtask name="DocumentAgencyTransfer" action="stop" order="8" />
+		<scheduledtask name="DocumentNotificationEngine" action="stop" order="9" />
+		<scheduledtask name="EmailPrintnowFilesSeries" action="stop" order="10" />
+		<scheduledtask name="FileNetMetadataUpdates" action="stop" order="11" />
+		<scheduledtask name="ImportAgencyDocstoFilenet" action="stop" order="12" />
+		<scheduledtask name="ImportMetadata" action="stop" order="13" />
+		<scheduledtask name="ImportSOLdocumentswithemailsenabled" action="stop" order="14" />
+		<scheduledtask name="PolicyDocumentLoadtoFileNet" action="stop" order="15" />
+		<scheduledtask name="PolicyExtracttoSecureTransport" action="stop" order="16" />
+		<scheduledtask name="PortalPolicyCancellations" action="stop" order="17" />
+		<scheduledtask name="ProducerAccountAccessUpdates_Prod" action="stop" order="18" />
+		<scheduledtask name="SpoolfileProcessing" action="stop" order="19" />
+	</play>
+	<play name="DisableTasks" role="ScheduleServers">			
+		<scheduledtask name="TAGSDataNotification" action="disable" order="1" />
+		<scheduledtask name="AccountingReportsMover" action="disable" order="2" />
+		<scheduledtask name="CloseBatchesWithNoFailures" action="disable" order="3" />
+		<scheduledtask name="COPYFROMISERIES" action="disable" order="4" />
+		<scheduledtask name="DigitalBatching" action="disable" order="5" />
+		<scheduledtask name="DigitalSignatureRequestNotification" action="disable" order="6" />
+		<scheduledtask name="DocumentTransfertoKofax" action="disable" order="7" />
+		<scheduledtask name="DocumentAgencyTransfer" action="disable" order="8" />
+		<scheduledtask name="DocumentNotificationEngine" action="disable" order="9" />
+		<scheduledtask name="EmailPrintnowFilesSeries" action="disable" order="10" />
+		<scheduledtask name="FileNetMetadataUpdates" action="disable" order="11" />
+		<scheduledtask name="ImportAgencyDocstoFilenet" action="disable" order="12" />
+		<scheduledtask name="ImportMetadata" action="disable" order="13" />
+		<scheduledtask name="ImportSOLdocumentswithemailsenabled" action="disable" order="14" />
+		<scheduledtask name="PolicyDocumentLoadtoFileNet" action="disable" order="15" />
+		<scheduledtask name="PolicyExtracttoSecureTransport" action="disable" order="16" />
+		<scheduledtask name="PortalPolicyCancellations" action="disable" order="17" />
+		<scheduledtask name="ProducerAccountAccessUpdates_Prod" action="disable" order="18" />
+		<scheduledtask name="SpoolfileProcessing" action="disable" order="19" />
+
+	</play>
+	<play name="EnableTasks" role="ScheduleServers" credential="srv_prod_local_tasks">			
+		<scheduledtask name="TAGSDataNotification" action="Enable" order="1" />
+		<scheduledtask name="AccountingReportsMover" action="Enable" order="2" />
+		<scheduledtask name="CloseBatchesWithNoFailures" action="Enable" order="3" />
+		<scheduledtask name="COPYFROMISERIES" action="Enable" order="4" />
+		<scheduledtask name="DigitalBatching" action="Enable" order="5" />
+		<scheduledtask name="DigitalSignatureRequestNotification" action="Enable" order="6" />
+		<scheduledtask name="DocumentTransfertoKofax" action="Enable" order="7" />
+		<scheduledtask name="DocumentAgencyTransfer" action="Enable" order="8" />
+		<scheduledtask name="DocumentNotificationEngine" action="Enable" order="9" />
+		<scheduledtask name="EmailPrintnowFilesSeries" action="Enable" order="10" />
+		<scheduledtask name="FileNetMetadataUpdates" action="Enable" order="11" />
+		<scheduledtask name="ImportAgencyDocstoFilenet" action="Enable" order="12" />
+		<scheduledtask name="ImportMetadata" action="Enable" order="13" />
+		<scheduledtask name="ImportSOLdocumentswithemailsenabled" action="Enable" order="14" />
+		<scheduledtask name="PolicyDocumentLoadtoFileNet" action="Enable" order="15" />
+		<scheduledtask name="PolicyExtracttoSecureTransport" action="Enable" order="16" />
+		<scheduledtask name="PortalPolicyCancellations" action="Enable" order="17" />
+		<scheduledtask name="ProducerAccountAccessUpdates_Prod" action="Enable" order="18" />
+		<scheduledtask name="SpoolfileProcessing" action="Enable" order="19" />
+
+	</play>
+	<play name="StartTasks" role="ScheduleServers" credential="srv_prod_local_tasks">			
+		<scheduledtask name="TAGSDataNotification" action="start" order="1" />
+		<scheduledtask name="AccountingReportsMover" action="start" order="2" />
+		<scheduledtask name="CloseBatchesWithNoFailures" action="start" order="3" />
+		<scheduledtask name="COPYFROMISERIES" action="start" order="4" />
+		<scheduledtask name="DigitalBatching" action="start" order="5" />
+		<scheduledtask name="DigitalSignatureRequestNotification" action="start" order="6" />
+		<scheduledtask name="DocumentTransfertoKofax" action="start" order="7" />
+		<scheduledtask name="DocumentAgencyTransfer" action="start" order="8" />
+		<scheduledtask name="DocumentNotificationEngine" action="start" order="9" />
+		<scheduledtask name="EmailPrintnowFilesSeries" action="start" order="10" />
+		<scheduledtask name="FileNetMetadataUpdates" action="start" order="11" />
+		<scheduledtask name="ImportAgencyDocstoFilenet" action="start" order="12" />
+		<scheduledtask name="ImportMetadata" action="start" order="13" />
+		<scheduledtask name="ImportSOLdocumentswithemailsenabled" action="start" order="14" />
+		<scheduledtask name="PolicyDocumentLoadtoFileNet" action="start" order="15" />
+		<scheduledtask name="PolicyExtracttoSecureTransport" action="start" order="16" />
+		<scheduledtask name="PortalPolicyCancellations" action="start" order="17" />
+		<scheduledtask name="ProducerAccountAccessUpdates_Prod" action="start" order="18" />
+		<scheduledtask name="SpoolfileProcessing" action="start" order="19" />
+	</play>
+	<play name="ScheduleServerStartup" role="ScheduleServers" order="1" method="serial">
+		<Windows action="Start"/>	
+	</play>
+	<play name="ScheduleServerShutdown" role="ScheduleServers" order="1" method="serial">
+		<Windows action="stop"/>
+	</play>	
+	<role name="ScheduleServers">
+		<server name="dvbox07.dvcorp.rcis.com" order="1"/>
+	</role>
+</playbook>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="SecurityServers">
+		<task id="1" type="service" name="w3svc" startmode="automatic" status="start"/>
+		<task id="2" type="command" path="C:\Windows\system32\iisreset.exe" arguments="/restart" wait="yes"/>
+	</play>
+	<play name="FedServers" import="D:\git\Jason_Brisbin\StartStop\FedServers.xml"/>
+	<play name="FarmMapsWeb">
+		<task id="1" type="service" name="w3svc" startmode="automatic" status="start"/>
+		<task id="2" type="service" name="schedule" startmode="automatic" status="start"/>
+		<task id="3" type="service" name="ImapsLayers" startmode="automatic" status="start"/>
+		<task id="4" type="command" path="C:\Windows\system32\iisreset.exe" arguments="/restart" wait="yes"/>
+		<task id="5" type="scheduledtask" name="RCISMappingBatchJobRunner" action="stop;start"/>			
+	</play>
+	<target>
+		<role name="SecurityServers">
+			<server name="DVSECSVCS01.dvcorp.rcis.COM" id="1"/>
+			<server name="DVSECSVCS02.dvcorp.rcis.COM" id="2"/>
+		</role>
+		<role name="FMWebServers">
+			<server name="DVFMWEB5.dvcorp.rcis.com"/>
+			<server name="DVFMWEB6.dvcorp.rcis.com"/>
+			<server name="DVFMWEB7.dvcorp.rcis.com"/>
+			<server name="TRFMWEB5.dvcorp.rcis.com"/>
+			<server name="TRFMWEB6.dvcorp.rcis.com"/>
+		</role>	
+	</target>
+</playbook>

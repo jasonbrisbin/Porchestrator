@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="PrecisionPolyShutdown" role="FarmMapsPrecisionPoly" order="1" method="serial">
+		<service action="stop" name="LoadHail2SQL"/>
+		<service action="disable" name="LoadHail2SQL"/>
+		<service action="stop" name="ArcSOCMonitor"/>
+		<service action="disable" name="ArcSOCMonitor"/>
+		<scheduledtask action="disable" name="PrecisionPoly"/>
+		<scheduledtask action="stop" name="PrecisionPoly"/>
+	</play>
+	<play name="PrecisionPolyStartup" role="FarmMapsServers" order="1" method="serial">
+		<service action="manual" name="LoadHail2SQL"/>
+		<service action="start" name="LoadHail2SQL"/>
+		<service action="manual" name="ArcSOCMonitor"/>
+		<service action="start" name="ArcSOCMonitor"/>
+		<scheduledtask action="start" name="PrecisionPoly"/>
+		<scheduledtask action="enable" name="PrecisionPoly"/>
+	</play>
+	<play name="ImapsShutdown" role="FarmMapsIMAPS" order="2,4,3" method="parallel">
+		<service action="stop" name="W3SVC"/>
+		<scheduledtask action="disable" name="RCISMappingBatchJobRunner"/>
+		<scheduledtask action="stop" name="RCISMappingBatchJobRunner"/>
+		<service action="stop" name="ImapsLayers"/>
+		<service action="disable" name="W3SVC"/>
+		<scheduledtask action="disable" name="PrecisionPoly"/>
+		<scheduledtask action="stop" name="PrecisionPoly"/>
+	</play>
+	<play name="ImapsStartup" role="FarmMapsIMAPS" order="2,3,4" method="parallel">
+		<service action="manual" name="W3SVC"/>
+		<service action="start" name="W3SVC"/>
+		<service action="start" name="ImapsLayers"/>
+		<Process name="IISRESET" action="start" commandline="iisreset.exe"/>
+		<scheduledtask action="enable" name="RCISMappingBatchJobRunner"/>
+		<scheduledtask action="start" name="RCISMappingBatchJobRunner"/>		
+	</play>		
+	<play name="PrecisionPolyServerStartup" role="FarmMapsPrecisionPoly" method="parallel" order="1">
+		<Server action="Start"/>
+	</play>
+	<play name="PrecisionPolyServerShutdown" role="FarmMapsPrecisionPoly" method="parallel" order="1">
+		<Server action="Stop"/>
+	</play>
+	<play name="FarmMapsServerStartup" role="FarmMapsIMAPS" method="parallel" order="4,3,2">
+		<Server action="Start"/>
+	</play>
+	<play name="FarmMapsServerShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMapsServerShutdown.xml"/>	
+	<role name="FarmMapsPrecisionPoly">
+		<server name="dvbox03.dvcorp.RCIS.COM" order="1"/>
+	</role>
+	<role name="FarmMapsServers" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMapsServers.xml"/>
+	<role name="FarmMapsIMAPS">
+		<server name="dvbox04.dvcorp.RCIS.COM" order="2"/>
+		<server name="dvbox05.dvcorp.RCIS.COM" order="3"/>
+		<server name="dvbox06.dvcorp.RCIS.COM" order="4"/>
+	</role>
+</playbook>
+

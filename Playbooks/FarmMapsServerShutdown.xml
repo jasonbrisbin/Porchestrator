@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="FarmMapsServerShutdown" role="FarmMapsIMAPS" method="parallel" order="2,4,3">
+		<task order="1" type="Server" action="stop"/>
+	</play>
+	<role name="FarmMapsIMAPS">
+		<server name="dvbox04.dvcorp.RCIS.COM" id="2"/>
+		<server name="dvbox05.dvcorp.RCIS.COM" id="3"/>
+		<server name="dvbox06.dvcorp.RCIS.COM" id="4"/>
+	</role>
+</playbook>
+

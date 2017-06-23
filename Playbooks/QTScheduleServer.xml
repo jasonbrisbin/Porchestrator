@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="ShutdownAndDisableTasks" role="qtservers">		
+		<task order="1" type="scheduledtask" name="CIQuote Batch Runner" action="stop"/>		
+		<task order="2" type="scheduledtask" name="CIQuote Batch Runner" action="disable"/>
+	</play>
+	<play name="ServiceStartup" role="qtservers">		
+		<task order="1" type="scheduledtask" name="CIQuote Batch Runner" action="enable"/>		
+		<task order="2" type="scheduledtask" name="CIQuote Batch Runner" action="start"/>
+	</play>
+	<target>
+		<role name="qtservers">
+			<!--<server name="pdqtschd01.corp.rcis.com" id="1"/>-->
+		</role>
+	</target>	
+</playbook>
+

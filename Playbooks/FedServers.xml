@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="ADFSShutdown" role="FedServers">		
+		<task order="1" type="service" action="stop" name="adfssrv"/>
+		<task order="2" type="service" action="disable" name="adfssrv"/>
+	</play>
+	<play name="ServiceStartup" role="FedServers">		
+		<task order="1" type="service" action="enable" name="adfssrv"/>
+		<task order="2" type="service" action="start" name="adfssrv"/>
+	</play>
+	<play name="ServerStartup" role="FedServers"></play>
+	<play name="ServerShutdown" role="FedServers"></play>
+	<role name="FedServers">
+		<server name="pdfedsrv01.corp.rcis.com" id="1"/>
+		<server name="pdfedsrv02.corp.rcis.com" id="2"/>
+	</role>
+</playbook>
+

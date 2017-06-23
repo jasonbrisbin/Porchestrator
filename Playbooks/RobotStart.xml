@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="ImapsStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>
+	<play name="PrecisionPolyStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>
+	<play name="WebFarmServiceStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\webfarm.xml"/>
+	<play name="EnableTasks" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\ScheduleServer.xml"/>
+	<play name="StartTasks" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\ScheduleServer.xml"/>	
+</playbook>
+

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<playbook>
+  <play name="" role="" order="" method="" import="" credential="">
+    <iisapppool name="" credential="" />
+    <iissite name="" credential="" />
+    <process name="" credential="" workingdirectory="" commandline="" />
+    <scheduledtask name="" credential="" />
+    <script name="" credential="" path="" arguments="" />
+    <service name="" credential="" />
+    <wait name="" time="" seconds="" />
+  </play>
+  <role name="" import="">
+    <server name="" order="" />
+  </role>
+</playbook>

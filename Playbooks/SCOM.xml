@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="MaintenanceMode" role="SCOMServer" credential="srv_prod_local_tasks">
+		<Process name="appavail 24 hours.bat" action="start" commandline="D:\admin\scom_scripts\Maint_mode\appavail\appavail 24 hours.bat"/>
+		<Wait name="5 second delay" seconds="5"/>
+		<Process name="DisableAllSubscriptions.bat" action="start" commandline="D:\Admin\SCOM_Scripts\Maint_Mode\Subscriptions\DisableAllSubscriptions.bat"/>
+		<Wait name="5 second delay" seconds="5"/>
+	</play>
+	<play name="SCOMShutdown" role="SCOMServer" order="1" method="serial">
+		<Windows name="SCOMServerShutdown" action="stop" wait="true"/>
+	</play>
+	<play name="SCOMStart" role="SCOMServer" order="1" method="serial">
+		<Windows name="SCOMServerStartup" action="start" wait="true"/>
+	</play>
+	<role name="SCOMServer">
+		<server name="dvbox02.dvcorp.rcis.com" order="1"/>
+	</role>
+</playbook>
+

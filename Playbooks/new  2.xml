@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<playbook>
+  <play name="imapsstartup" role="farmmapsimaps" order="2,3,4" method="parallel">
+    <service action="manual" name="w3svc" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="1" />
+    <service action="start" name="w3svc" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="2" />
+    <service action="start" name="imapslayers" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="3" />
+    <process name="iisreset" action="start" commandline="iisreset.exe" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="4" />
+    <scheduledtask action="enable" name="rcismappingbatchjobrunner" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="5" />
+    <scheduledtask action="start" name="rcismappingbatchjobrunner" computername="dvbox04.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com" task="6" />
+  </play>
+  <play name="precisionpolystartup" role="farmmapsservers" order="1" method="serial">
+    <service action="manual" name="loadhail2sql" computername="dvbox03.dvcorp.rcis.com" task="1" />
+    <service action="start" name="loadhail2sql" computername="dvbox03.dvcorp.rcis.com" task="2" />
+    <service action="manual" name="arcsocmonitor" computername="dvbox03.dvcorp.rcis.com" task="3" />
+    <service action="start" name="arcsocmonitor" computername="dvbox03.dvcorp.rcis.com" task="4" />
+    <scheduledtask action="start" name="precisionpoly" computername="dvbox03.dvcorp.rcis.com" task="5" />
+    <scheduledtask action="enable" name="precisionpoly" computername="dvbox03.dvcorp.rcis.com" task="6" />
+  </play>
+  <play name="webfarmservicestartup" role="webfarm" method="serial" order="1,2">
+    <service action="enable" name="w3svc" computername="dvbox09.dvcorp.rcis.com" task="1" />
+    <service action="start" name="w3svc" computername="dvbox09.dvcorp.rcis.com" task="2" />
+    <process name="iisreset" action="start" commandline="iisreset.exe /start" computername="dvbox09.dvcorp.rcis.com" task="3" />
+    <service action="enable" name="w3svc" computername="dvbox08.dvcorp.rcis.com" task="4" />
+    <service action="start" name="w3svc" computername="dvbox08.dvcorp.rcis.com" task="5" />
+    <process name="iisreset" action="start" commandline="iisreset.exe /start" computername="dvbox08.dvcorp.rcis.com" task="6" />
+  </play>
+  <play name="enabletasks" role="scheduleservers" credential="srv_prod_local_tasks" method="serial" order="1">
+    <scheduledtask name="tagsdatanotification" action="enable" computername="dvbox07.dvcorp.rcis.com" task="1" />
+    <scheduledtask name="accountingreportsmover" action="enable" computername="dvbox07.dvcorp.rcis.com" task="2" />
+    <scheduledtask name="closebatcheswithnofailures" action="enable" computername="dvbox07.dvcorp.rcis.com" task="3" />
+    <scheduledtask name="copyfromiseries" action="enable" computername="dvbox07.dvcorp.rcis.com" task="4" />
+    <scheduledtask name="digitalbatching" action="enable" computername="dvbox07.dvcorp.rcis.com" task="5" />
+    <scheduledtask name="digitalsignaturerequestnotification" action="enable" computername="dvbox07.dvcorp.rcis.com" task="6" />
+    <scheduledtask name="documenttransfertokofax" action="enable" computername="dvbox07.dvcorp.rcis.com" task="7" />
+    <scheduledtask name="documentagencytransfer" action="enable" computername="dvbox07.dvcorp.rcis.com" task="8" />
+    <scheduledtask name="documentnotificationengine" action="enable" computername="dvbox07.dvcorp.rcis.com" task="9" />
+    <scheduledtask name="emailprintnowfilesseries" action="enable" computername="dvbox07.dvcorp.rcis.com" task="10" />
+    <scheduledtask name="filenetmetadataupdates" action="enable" computername="dvbox07.dvcorp.rcis.com" task="11" />
+    <scheduledtask name="importagencydocstofilenet" action="enable" computername="dvbox07.dvcorp.rcis.com" task="12" />
+    <scheduledtask name="importmetadata" action="enable" computername="dvbox07.dvcorp.rcis.com" task="13" />
+    <scheduledtask name="importsoldocumentswithemailsenabled" action="enable" computername="dvbox07.dvcorp.rcis.com" task="14" />
+    <scheduledtask name="policydocumentloadtofilenet" action="enable" computername="dvbox07.dvcorp.rcis.com" task="15" />
+    <scheduledtask name="policyextracttosecuretransport" action="enable" computername="dvbox07.dvcorp.rcis.com" task="16" />
+    <scheduledtask name="portalpolicycancellations" action="enable" computername="dvbox07.dvcorp.rcis.com" task="17" />
+    <scheduledtask name="produceraccountaccessupdates_prod" action="enable" computername="dvbox07.dvcorp.rcis.com" task="18" />
+    <scheduledtask name="spoolfileprocessing" action="enable" computername="dvbox07.dvcorp.rcis.com" task="19" />
+  </play>
+  <play name="starttasks" role="scheduleservers" credential="srv_prod_local_tasks" method="serial" order="1">
+    <scheduledtask name="tagsdatanotification" action="start" computername="dvbox07.dvcorp.rcis.com" task="1" />
+    <scheduledtask name="accountingreportsmover" action="start" computername="dvbox07.dvcorp.rcis.com" task="2" />
+    <scheduledtask name="closebatcheswithnofailures" action="start" computername="dvbox07.dvcorp.rcis.com" task="3" />
+    <scheduledtask name="copyfromiseries" action="start" computername="dvbox07.dvcorp.rcis.com" task="4" />
+    <scheduledtask name="digitalbatching" action="start" computername="dvbox07.dvcorp.rcis.com" task="5" />
+    <scheduledtask name="digitalsignaturerequestnotification" action="start" computername="dvbox07.dvcorp.rcis.com" task="6" />
+    <scheduledtask name="documenttransfertokofax" action="start" computername="dvbox07.dvcorp.rcis.com" task="7" />
+    <scheduledtask name="documentagencytransfer" action="start" computername="dvbox07.dvcorp.rcis.com" task="8" />
+    <scheduledtask name="documentnotificationengine" action="start" computername="dvbox07.dvcorp.rcis.com" task="9" />
+    <scheduledtask name="emailprintnowfilesseries" action="start" computername="dvbox07.dvcorp.rcis.com" task="10" />
+    <scheduledtask name="filenetmetadataupdates" action="start" computername="dvbox07.dvcorp.rcis.com" task="11" />
+    <scheduledtask name="importagencydocstofilenet" action="start" computername="dvbox07.dvcorp.rcis.com" task="12" />
+    <scheduledtask name="importmetadata" action="start" computername="dvbox07.dvcorp.rcis.com" task="13" />
+    <scheduledtask name="importsoldocumentswithemailsenabled" action="start" computername="dvbox07.dvcorp.rcis.com" task="14" />
+    <scheduledtask name="policydocumentloadtofilenet" action="start" computername="dvbox07.dvcorp.rcis.com" task="15" />
+    <scheduledtask name="policyextracttosecuretransport" action="start" computername="dvbox07.dvcorp.rcis.com" task="16" />
+    <scheduledtask name="portalpolicycancellations" action="start" computername="dvbox07.dvcorp.rcis.com" task="17" />
+    <scheduledtask name="produceraccountaccessupdates_prod" action="start" computername="dvbox07.dvcorp.rcis.com" task="18" />
+    <scheduledtask name="spoolfileprocessing" action="start" computername="dvbox07.dvcorp.rcis.com" task="19" />
+  </play>
+</playbook>

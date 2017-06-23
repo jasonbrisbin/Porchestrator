@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Playbook>
+	<Play Name="" Role="" Order="" Method="" Import="" Credential=""/>	
+	<Role Name="" Import="">
+		<Server Name="" Order="" />
+	</Role>
+</Playbook>

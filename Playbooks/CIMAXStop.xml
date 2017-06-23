@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<process>
+	<step id="1" action="disable" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Execute FIM Delta Sync Cycle"/>		
+	<step id="2" action="disable" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Maintain Unique IDs"/>
+	<step id="3" action="disable" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Update TeamMember E-mail Addresses in Directory Entry"/>
+	<step id="4" action="wait" type="Script" minutes="40"/>
+	<step id="5" action="run" type="command" server="PDSCOM01.CORP.RCIS.COM" path="D:\admin\scom_scripts\Maint_mode\appavail\appavail 24 hours.bat"/>
+	<step id="6" action="wait" type="Script" minutes="10"/>
+	<step id="7" action="run" type="command" server="PDSCOM01.CORP.RCIS.COM" path="D:\Admin\SCOM_Scripts\Maint_Mode\Subscriptions\DisableAllSubscriptions.bat"/>
+	<step id="8" action="wait" type="Script" minutes="10"/>
+	<step id="9" action="stop" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Execute FIM Delta Sync Cycle"/>		
+	<step id="10" action="stop" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Maintain Unique IDs"/>
+	<step id="11" action="stop" type="ScheduledTask" server="PDILM02.CORP.RCIS.COM" name="Update TeamMember E-mail Addresses in Directory Entry"/>
+	<step id="12" action="disable" type="service" server="PDFMMAP3.CORP.RCIS.COM" name="LoadHail2SQL"/>
+	<step id="13" action="stop" type="service" server="PDFMMAP3.CORP.RCIS.COM" name="LoadHail2SQL"/>
+	<step id="14" action="disable" type="service" server="PDFMMAP3.CORP.RCIS.COM" name="ArcSOCMonitor"/>
+	<step id="15" action="stop" type="service" server="PDFMMAP3.CORP.RCIS.COM" name="ArcSOCMonitor"/>
+	<step id="16" action="disable" type="ScheduledTask" server="PDFMMAP3.CORP.RCIS.COM" name="PrecisionPoly"/>		
+	<step id="17" action="stop" type="ScheduledTask" server="PDFMMAP3.CORP.RCIS.COM" name="PrecisionPoly"/>
+	<step id="19" action="stop" type="service" server="PDFMWEB5.CORP.RCIS.COM" name="ImapsLayers"/>
+	<step id="20" action="disable" type="service" server="PDFMWEB5.CORP.RCIS.COM" name="W3SVC"/>
+	<step id="21" action="stop" type="service" server="PDFMWEB5.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="22" action="disable" type="service" server="PDFMWEB5.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="23" action="stop" type="process" server="PDFMWEB5.CORP.RCIS.COM" name="RCISMappingBatchJobRunner.exe"/>
+	<step id="24" action="stop" type="service" server="PDFMWEB6.CORP.RCIS.COM" name="ImapsLayers"/>
+	<step id="25" action="disable" type="service" server="PDFMWEB6.CORP.RCIS.COM" name="W3SVC"/>
+	<step id="26" action="stop" type="service" server="PDFMWEB6.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="27" action="disable" type="service" server="PDFMWEB6.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="28" action="stop" type="process" server="PDFMWEB6.CORP.RCIS.COM" name="RCISMappingBatchJobRunner.exe"/>
+	<step id="29" action="stop" type="service" server="PDFMWEB7.CORP.RCIS.COM" name="ImapsLayers"/>
+	<step id="30" action="disable" type="service" server="PDFMWEB7.CORP.RCIS.COM" name="W3SVC"/>
+	<step id="31" action="stop" type="service" server="PDFMWEB7.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="32" action="disable" type="service" server="PDFMWEB7.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="33" action="stop" type="process" server="PDFMWEB7.CORP.RCIS.COM" name="RCISMappingBatchJobRunner.exe"/>
+	<step id="34" action="stop" type="service" server="TRFMWEB5.CORP.RCIS.COM" name="ImapsLayers"/>
+	<step id="35" action="disable" type="service" server="TRFMWEB5.CORP.RCIS.COM" name="W3SVC"/>
+	<step id="36" action="stop" type="service" server="TRFMWEB5.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="37" action="disable" type="service" server="TRFMWEB5.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="38" action="stop" type="process" server="TRFMWEB5.CORP.RCIS.COM" name="RCISMappingBatchJobRunner.exe"/>
+	<step id="39" action="stop" type="service" server="TRFMWEB6.CORP.RCIS.COM" name="ImapsLayers"/>
+	<step id="40" action="disable" type="service" server="TRFMWEB6.CORP.RCIS.COM" name="W3SVC"/>
+	<step id="41" action="stop" type="service" server="TRFMWEB6.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="42" action="disable" type="service" server="TRFMWEB6.CORP.RCIS.COM" name="SCHEDULE"/>
+	<step id="43" action="stop" type="process" server="TRFMWEB6.CORP.RCIS.COM" name="RCISMappingBatchJobRunner.exe"/>
+	<step id="44" action="disable" type="service" server="PDWAP01.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="45" action="disable" type="service" server="PDWAP01.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="46" action="disable" type="service" server="PDWAP01.CORP.RCIS.COM" name="appproxysvc"/>
+	<step id="47" action="disable" type="service" server="PDWAP01.CORP.RCIS.COM" name="appproxysvc"/>
+	<step id="48" action="disable" type="service" server="PDWAP02.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="49" action="disable" type="service" server="PDWAP02.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="50" action="disable" type="service" server="PDWAP02.CORP.RCIS.COM" name="appproxysvc"/>
+	<step id="51" action="disable" type="service" server="PDWAP02.CORP.RCIS.COM" name="appproxysvc"/>
+	<step id="52" action="disable" type="service" server="PDFEDSVR01.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="53" action="disable" type="service" server="PDFEDSVR01.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="54" action="disable" type="service" server="PDFEDSVR02.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="55" action="disable" type="service" server="PDFEDSVR02.CORP.RCIS.COM" name="adfssrv"/>
+	<step id="56" action="disable" type="service" server="PDWEB01.CORP.RCIS.COM" name="w3svc"/>
+	<step id="57" action="disable" type="service" server="PDWEB01.CORP.RCIS.COM" name="w3svc"/>
+	<step id="58" action="disable" type="service" server="PDWEB02.CORP.RCIS.COM" name="w3svc"/>
+	<step id="59" action="disable" type="service" server="PDWEB02.CORP.RCIS.COM" name="w3svc"/>
+	<step id="60" action="disable" type="service" server="PDWEB03.CORP.RCIS.COM" name="w3svc"/>
+	<step id="61" action="disable" type="service" server="PDWEB03.CORP.RCIS.COM" name="w3svc"/>
+	<step id="62" action="disable" type="service" server="PDWEB04.CORP.RCIS.COM" name="w3svc"/>
+	<step id="63" action="disable" type="service" server="PDWEB04.CORP.RCIS.COM" name="w3svc"/>
+	<step id="64" action="disable" type="service" server="PDWEB05.CORP.RCIS.COM" name="w3svc"/>
+	<step id="65" action="disable" type="service" server="PDWEB05.CORP.RCIS.COM" name="w3svc"/>
+	<step id="66" action="disable" type="service" server="PDWEB06.CORP.RCIS.COM" name="w3svc"/>
+	<step id="67" action="disable" type="service" server="PDWEB06.CORP.RCIS.COM" name="w3svc"/>
+	<step id="68" action="disable" type="service" server="PDWEB07.CORP.RCIS.COM" name="w3svc"/>
+	<step id="69" action="disable" type="service" server="PDWEB07.CORP.RCIS.COM" name="w3svc"/>
+	<step id="70" action="disable" type="service" server="PDWEB08.CORP.RCIS.COM" name="w3svc"/>
+	<step id="71" action="disable" type="service" server="PDWEB08.CORP.RCIS.COM" name="w3svc"/>
+	<step id="72" action="disable" type="service" server="PDSECSVCS01.CORP.RCIS.COM" name="w3svc"/>
+	<step id="73" action="disable" type="service" server="PDSECSVCS01.CORP.RCIS.COM" name="w3svc"/>
+	<step id="74" action="disable" type="service" server="PDSECSVCS02.CORP.RCIS.COM" name="w3svc"/>
+	<step id="75" action="disable" type="service" server="PDSECSVCS02.CORP.RCIS.COM" name="w3svc"/>
+	<step id="76" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="AccountingReportsMover"/>		
+	<step id="77" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Close Batches With No Failures"/>
+	<step id="78" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="COPY FROM ISERIES"/>
+	<step id="79" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Digital Batching"/>		
+	<step id="80" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DigitalSignatureRequestNotification"/>
+	<step id="81" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Document Transfer to Kofax"/>
+	<step id="82" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DocumentAgencyTransfer"/>		
+	<step id="83" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DocumentNotificationEngine"/>
+	<step id="84" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Email Printnow Files Series"/>
+	<step id="85" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="FileNet Metadata Updates"/>		
+	<step id="86" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import Agency Docs to Filenet"/>
+	<step id="87" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import Metadata"/>
+	<step id="88" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import SOL documents with emails enabled"/>		
+	<step id="89" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Policy Document Load to FileNet"/>
+	<step id="90" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Policy Extract to Secure Transport"/>
+	<step id="91" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Portal Policy Cancellations"/>		
+	<step id="92" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="ProducerAccountAccessUpdates_Prod"/>
+	<step id="93" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Spoolfile Processing"/>
+	<step id="94" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="TAGSDataNotification"/>		
+	<step id="95" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="AccountingReportsMover"/>
+	<step id="96" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Close Batches With No Failures"/>
+	<step id="97" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="COPY FROM ISERIES"/>		
+	<step id="98" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Digital Batching"/>
+	<step id="99" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DigitalSignatureRequestNotification"/>
+	<step id="100" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Document Transfer to Kofax"/>
+	<step id="101" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DocumentAgencyTransfer"/>
+	<step id="102" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="DocumentNotificationEngine"/>
+	<step id="103" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Email Printnow Files Series"/>
+	<step id="104" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="FileNet Metadata Updates"/>
+	<step id="105" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import Agency Docs to Filenets"/>
+	<step id="106" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import Metadata"/>
+	<step id="107" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Import SOL documents with emails enabled"/>
+	<step id="108" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Policy Document Load to FileNet"/>
+	<step id="109" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Policy Extract to Secure Transport"/>
+	<step id="110" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Portal Policy Cancellations"/>
+	<step id="111" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="ProducerAccountAccessUpdates_Prod"/>
+	<step id="112" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Spoolfile Processing"/>
+	<step id="113" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="TAGSDataNotification"/>
+	<step id="114" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Set Batches to Scanned Status"/>
+	<step id="115" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="AccountingIBMiReportMover"/>
+	<step id="116" action="stop" type="ScheduledTask" server="PDSCHD01.CORP.RCIS.COM" name="Uploaded Document Processing"/>
+	<step id="117" action="stop" type="ScheduledTask" server="PDQTSCHD01.CORP.RCIS.COM" name="CIQuote Batch Runner"/>
+	<step id="118" action="disable" type="ScheduledTask" server="PDQTSCHD01.CORP.RCIS.COM" name="CIQuote Batch Runner"/>
+</process>

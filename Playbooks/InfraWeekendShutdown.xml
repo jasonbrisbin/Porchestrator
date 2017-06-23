@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="SCOMShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\SCOM.xml"/>
+	<play name="PrecisionPolyServerShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>
+	<play name="FarmMapsServerShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>
+	<play name="WebFarmServerShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\WebFarm.xml"/>
+	<play name="ScheduleServerShutdown" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\ScheduleServer.xml"/>
+</playbook>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?> <helpItems xmlns="http://msh" schema="maml">
+<command:command
+  xmlns:maml=http://schemas.microsoft.com/maml/2004/10
+  xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004
+  /10" 
+  xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+  <command:details>
+    "zEngine is a datacenter orchestration tool which processes playbooks to automate a series of related tasks."
+  </command:details>
+  <maml:description>
+    'zEngine provides a tool to combine tasks that need to be performed in sequence to support a business or IT process.  Please note attribute names and values are case sensitive when using the "import" feature.'
+  </maml:description>
+  <command:syntax>
+    <!--Add syntax information here-->
+  </command:syntax>
+  <command:parameters>
+    '.PARAMETER Path
+    Path to the XML playbook to execute. (Mandatory/Validated with Test-Path)
+    
+    .PARAMETER Cred
+    Provide a credential object to execute individual tasks with. (Optional)
+    
+    .PARAMETER Secret
+    The Secret parameter take a username and will attempt to create a Credential object from Secret Server. (Optional)
+
+    .PARAMETER PassThru
+    An optional parameter which will return the native powershell objects from each module. (Optional)'
+  </command:parameters>
+  <command:inputTypes>
+    <!--Add input type information here-->
+  </command:inputTypes>
+  <command:returnValues>
+    <!--Add return value information here-->
+  </command:returnValues>
+  <maml:alertSet>
+    <!--Add Note information here-->
+  </maml:alertSet>
+  <command:examples>
+    '.Example
+    zEngine.ps1 -path robotstart.xml
+    
+    If no additional parameters other than path are specified the script will prompt for a credential set to use.  This command will process robotstart.xml, importing any other XML documents as needed.
+    
+    
+    .Example
+    zEngine.ps1 -path robotstart.xml -credential $cred
+    
+    Runs the script with a specified set of credentials for remote commands.
+    
+    
+    .Example
+    zEngine.ps1 -path robotstart.xml -credential $cred -PassThru
+    
+    Runs the script with a specified set of credentials for remote commands and will return the native powershell objects provided by each module.  Useful for reporting an potentially pipeline applications.
+    
+    
+    .Example
+    zEngine.ps1 -path robotstart.xml -credential $cred -verbose
+	
+    Runs the script with a specified set of credentials for remote commands and will display the native powershell objects provided by each module in the verbose stream'
+  </command:examples>
+  <maml:relatedLinks>
+    <!--Add links to related content here-->
+  </maml:relatedLinks>
+</command:command>

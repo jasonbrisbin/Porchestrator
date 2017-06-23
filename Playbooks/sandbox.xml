@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="SCOMStart" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\scom.xml"/>
+</playbook>
+

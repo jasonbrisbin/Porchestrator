@@ -1,0 +1,30 @@
+Rules:
+XML Documents cannot reference themselves
+XML imports a maximum of 10 levels deep
+Default mode of operation is serial for plays unless specified as parallel
+
+Modules
+Functions must support the EXACT same parameter names
+XML validation only ensure parameters are in the defined list, does not handle if they are not present
+Modules and their functions must singular form
+They must have a ztask and ztaskparameters
+
+XML
+Play order overrides document order
+The server task name is reserved and cannot be implement by module
+
+zEngine
+Informational messages are used instead of write-host for output.  To see output you must set 
+InformationAction or InformationVariables.  Setting InformationAction will prevent the log file from capturing
+messages.
+
+Ex1.  No output to the screen except warnings and errors.  All output goes to the transcript and windows event log
+zEngine.ps1 -path .\playbooks\RobotStart.xml
+
+Ex2.  All output to the screen including information, warnings, and errors.  Only errors and warnings go to the transcript and windows event log
+zEngine.ps1 -path .\playbooks\RobotStart.xml -informationaction continue
+
+Ex3.  All output to the screen, transcript, and eventlog including information, warnings, and errors.
+zEngine.ps1 -path .\playbooks\RobotStart.xml 6>&1
+
+The temporary file used for transcript logging create a tmp file in the user profile.  This may need to move.

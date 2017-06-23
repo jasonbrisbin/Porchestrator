@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<process>
+	<group name="FedServers">
+		<server name="DVFEDSVR01.dvcorp.rcis.com"/>
+		<server name="DVFEDSVR02.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="service" name="adfssrv" startmode="automatic" status="start"/>
+			<task id="2" type="command" path="C:\Windows\system32\iisreset.exe" arguments="/restart" wait="yes"/>
+		</start>
+	</group>
+	<group name="FarmMapsWeb">
+		<server name="DVFMWEB5.dvcorp.rcis.com"/>
+		<server name="DVFMWEB6.dvcorp.rcis.com"/>
+		<server name="DVFMWEB7.dvcorp.rcis.com"/>
+		<server name="TRFMWEB5.dvcorp.rcis.com"/>
+		<server name="TRFMWEB6.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="service" name="w3svc" startmode="automatic" status="start"/>
+			<task id="2" type="service" name="schedule" startmode="automatic" status="start"/>
+			<task id="3" type="service" name="ImapsLayers" startmode="automatic" status="start"/>
+			<task id="4" type="command" path="C:\Windows\system32\iisreset.exe" arguments="/restart" wait="yes"/>
+			<task id="5" type="scheduledtask" name="RCISMappingBatchJobRunner" action="stop;start"/>			
+		</start>
+	</group>
+	<group name="WebFarm">
+	<group name="FarmMaps">
+		<server name="DVFMMAP3.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="service" name="LoadHail2SQL" startmode="automatic" status="start"/>
+			<task id="2" type="service" name="ArcSOCMonitor" startmode="automatic" status="start"/>
+			<task id="4" type="scheduledtask" name="PrecisionPoly" action="enable;start"/>			
+		</start>
+	</group>
+
+		<server name="DVWEB01.dvcorp.rcis.com"/>
+		<server name="DVWEB02.dvcorp.rcis.com"/>
+		<server name="DVWEB03.dvcorp.rcis.com"/>
+		<server name="DVWEB04.dvcorp.rcis.com"/>
+		<server name="DVWEB05.dvcorp.rcis.com"/>
+		<server name="DVWEB06.dvcorp.rcis.com"/>
+		<server name="DVWEB07.dvcorp.rcis.com"/>
+		<server name="DVWEB08.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="service" name="w3svc" startmode="automatic" status="start"/>
+		</start>
+	</group>
+	<group name="ILM">
+		<server name="DVILM02.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="scheduledtask" name="Execute FIM Delta Sync Cycle" action="enable;start"/>
+			<task id="2" type="scheduledtask" name="Maintain Unique IDs" action="enable;start"/>
+			<task id="3" type="scheduledtask" name="Update TeamMember E-mail Addresses in Directory Entry" action="enable;start"/>
+		</start>
+	</group>
+	<group name="ScheduleServer">
+		<server name="DVSCHD01.dvcorp.rcis.com"/>
+		<start>
+			<task id="1" type="ScheduledTask" name="AccountingReportsMover" action="enable;start"/>		
+			<task id="2" type="ScheduledTask" name="Close Batches With No Failures" action="enable;start"/>
+			<task id="3" type="ScheduledTask" name="COPY FROM ISERIES" action="enable;start"/>
+			<task id="4" type="ScheduledTask" name="Digital Batching" action="enable;start"/>		
+			<task id="5" type="ScheduledTask" name="DigitalSignatureRequestNotification" action="enable;start"/>
+			<task id="6" type="ScheduledTask" name="Document Transfer to Kofax" action="enable;start"/>
+			<task id="7" type="ScheduledTask" name="DocumentAgencyTransfer" action="enable;start"/>		
+			<task id="8" type="ScheduledTask" name="DocumentNotificationEngine" action="enable;start"/>
+			<task id="9" type="ScheduledTask" name="Email Printnow Files Series" action="enable;start"/>
+			<task id="10" type="ScheduledTask" name="FileNet Metadata Updates" action="enable;start"/>		
+			<task id="11" type="ScheduledTask" name="Import Agency Docs to Filenet" action="enable;start"/>
+			<task id="12" type="ScheduledTask" name="Import Metadata" action="enable;start"/>
+			<task id="13" type="ScheduledTask" name="Import SOL documents with emails enabled" action="enable;start"/>		
+			<task id="14" type="ScheduledTask" name="Policy Document Load to FileNet" action="enable;start"/>
+			<task id="15" type="ScheduledTask" name="Policy Extract to Secure Transport" action="enable;start"/>
+			<task id="16" type="ScheduledTask" name="Portal Policy Cancellations" action="enable;start"/>		
+			<task id="17" type="ScheduledTask" name="ProducerAccountAccessUpdates_Prod" action="enable;start"/>
+			<task id="18" type="ScheduledTask" name="Spoolfile Processing" action="enable;start"/>
+			<task id="19" type="ScheduledTask" name="TAGSDataNotification" action="enable;start"/>		
+			<task id="20" type="ScheduledTask" name="AccountingReportsMover" action="enable;start"/>
+			<task id="21" type="ScheduledTask" name="Close Batches With No Failures" action="enable;start"/>
+			<task id="22" type="ScheduledTask" name="COPY FROM ISERIES" action="enable;start"/>		
+			<task id="23" type="ScheduledTask" name="Digital Batching" action="enable;start"/>
+			<task id="24" type="ScheduledTask" name="DigitalSignatureRequestNotification" action="enable;start"/>
+			<task id="25" type="ScheduledTask" name="Document Transfer to Kofax" action="enable;start"/>
+			<task id="26" type="ScheduledTask" name="DocumentAgencyTransfer" action="enable;start"/>
+			<task id="27" type="ScheduledTask" name="DocumentNotificationEngine" action="enable;start"/>
+			<task id="28" type="ScheduledTask" name="Email Printnow Files Series" action="enable;start"/>
+			<task id="29" type="ScheduledTask" name="FileNet Metadata Updates" action="enable;start"/>
+			<task id="30" type="ScheduledTask" name="Import Agency Docs to Filenets" action="enable;start"/>
+			<task id="31" type="ScheduledTask" name="Import Metadata" action="enable;start"/>
+			<task id="32" type="ScheduledTask" name="Import SOL documents with emails enabled" action="enable;start"/>
+			<task id="33" type="ScheduledTask" name="Policy Document Load to FileNet" action="enable;start"/>
+			<task id="34" type="ScheduledTask" name="Policy Extract to Secure Transport" action="enable;start"/>
+			<task id="35" type="ScheduledTask" name="Portal Policy Cancellations" action="enable;start"/>
+		</start>
+	</group>
+</process>
+

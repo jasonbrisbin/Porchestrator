@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="WebFarmServerStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\WebFarm.xml"/>
+	<play name="PrecisionPolyServerStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>
+	<play name="FarmMapsServerStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\FarmMaps.xml"/>	
+	<play name="ScheduleServerStartup" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\ScheduleServer.xml"/>
+	<play name="SCOMStart" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\SCOM.xml"/>
+</playbook>
+

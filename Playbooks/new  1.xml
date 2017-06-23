@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<playbook>
+  <play name="maintenancemode" role="scomserver" credential="srv_prod_local_tasks" method="serial" order="1">
+    <process name="appavail 24 hours.bat" action="start" commandline="d:\admin\scom_scripts\maint_mode\appavail\appavail 24 hours.bat" computername="dvbox02.dvcorp.rcis.com" task="1" />
+    <wait name="5 second delay" seconds="5" computername="dvbox02.dvcorp.rcis.com" task="2" />
+    <process name="disableallsubscriptions.bat" action="start" commandline="d:\admin\scom_scripts\maint_mode\subscriptions\disableallsubscriptions.bat" computername="dvbox02.dvcorp.rcis.com" task="3" />
+    <wait name="5 second delay" seconds="5" computername="dvbox02.dvcorp.rcis.com" task="4" />
+  </play>
+  <play name="precisionpolyshutdown" role="farmmapsprecisionpoly" order="1" method="serial">
+    <service action="stop" name="loadhail2sql" computername="dvbox03.dvcorp.rcis.com" task="1" />
+    <service action="disable" name="loadhail2sql" computername="dvbox03.dvcorp.rcis.com" task="2" />
+    <service action="stop" name="arcsocmonitor" computername="dvbox03.dvcorp.rcis.com" task="3" />
+    <service action="disable" name="arcsocmonitor" computername="dvbox03.dvcorp.rcis.com" task="4" />
+    <scheduledtask action="disable" name="precisionpoly" computername="dvbox03.dvcorp.rcis.com" task="5" />
+    <scheduledtask action="stop" name="precisionpoly" computername="dvbox03.dvcorp.rcis.com" task="6" />
+  </play>
+  <play name="imapsshutdown" role="farmmapsimaps" order="2,4,3" method="parallel">
+    <service action="stop" name="w3svc" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="1" />
+    <scheduledtask action="disable" name="rcismappingbatchjobrunner" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="2" />
+    <scheduledtask action="stop" name="rcismappingbatchjobrunner" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="3" />
+    <service action="stop" name="imapslayers" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="4" />
+    <service action="disable" name="w3svc" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="5" />
+    <scheduledtask action="disable" name="precisionpoly" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="6" />
+    <scheduledtask action="stop" name="precisionpoly" computername="dvbox04.dvcorp.rcis.com,dvbox06.dvcorp.rcis.com,dvbox05.dvcorp.rcis.com" task="7" />
+  </play>
+  <play name="webfarmserviceshutdown" role="webfarm" method="serial" order="1,2">
+    <service action="stop" name="w3svc" computername="dvbox09.dvcorp.rcis.com" task="1" />
+    <service action="disable" name="w3svc" computername="dvbox09.dvcorp.rcis.com" task="2" />
+    <service action="stop" name="w3svc" computername="dvbox08.dvcorp.rcis.com" task="3" />
+    <service action="disable" name="w3svc" computername="dvbox08.dvcorp.rcis.com" task="4" />
+  </play>
+  <play name="shutdowntasks" role="scheduleservers" method="serial" order="1">
+    <scheduledtask name="tagsdatanotification" action="stop" computername="dvbox07.dvcorp.rcis.com" task="1" />
+    <scheduledtask name="accountingreportsmover" action="stop" computername="dvbox07.dvcorp.rcis.com" task="2" />
+    <scheduledtask name="closebatcheswithnofailures" action="stop" computername="dvbox07.dvcorp.rcis.com" task="3" />
+    <scheduledtask name="copyfromiseries" action="stop" computername="dvbox07.dvcorp.rcis.com" task="4" />
+    <scheduledtask name="digitalbatching" action="stop" computername="dvbox07.dvcorp.rcis.com" task="5" />
+    <scheduledtask name="digitalsignaturerequestnotification" action="stop" computername="dvbox07.dvcorp.rcis.com" task="6" />
+    <scheduledtask name="documenttransfertokofax" action="stop" computername="dvbox07.dvcorp.rcis.com" task="7" />
+    <scheduledtask name="documentagencytransfer" action="stop" computername="dvbox07.dvcorp.rcis.com" task="8" />
+    <scheduledtask name="documentnotificationengine" action="stop" computername="dvbox07.dvcorp.rcis.com" task="9" />
+    <scheduledtask name="emailprintnowfilesseries" action="stop" computername="dvbox07.dvcorp.rcis.com" task="10" />
+    <scheduledtask name="filenetmetadataupdates" action="stop" computername="dvbox07.dvcorp.rcis.com" task="11" />
+    <scheduledtask name="importagencydocstofilenet" action="stop" computername="dvbox07.dvcorp.rcis.com" task="12" />
+    <scheduledtask name="importmetadata" action="stop" computername="dvbox07.dvcorp.rcis.com" task="13" />
+    <scheduledtask name="importsoldocumentswithemailsenabled" action="stop" computername="dvbox07.dvcorp.rcis.com" task="14" />
+    <scheduledtask name="policydocumentloadtofilenet" action="stop" computername="dvbox07.dvcorp.rcis.com" task="15" />
+    <scheduledtask name="policyextracttosecuretransport" action="stop" computername="dvbox07.dvcorp.rcis.com" task="16" />
+    <scheduledtask name="portalpolicycancellations" action="stop" computername="dvbox07.dvcorp.rcis.com" task="17" />
+    <scheduledtask name="produceraccountaccessupdates_prod" action="stop" computername="dvbox07.dvcorp.rcis.com" task="18" />
+    <scheduledtask name="spoolfileprocessing" action="stop" computername="dvbox07.dvcorp.rcis.com" task="19" />
+  </play>
+  <play name="disabletasks" role="scheduleservers" method="serial" order="1">
+    <scheduledtask name="tagsdatanotification" action="disable" computername="dvbox07.dvcorp.rcis.com" task="1" />
+    <scheduledtask name="accountingreportsmover" action="disable" computername="dvbox07.dvcorp.rcis.com" task="2" />
+    <scheduledtask name="closebatcheswithnofailures" action="disable" computername="dvbox07.dvcorp.rcis.com" task="3" />
+    <scheduledtask name="copyfromiseries" action="disable" computername="dvbox07.dvcorp.rcis.com" task="4" />
+    <scheduledtask name="digitalbatching" action="disable" computername="dvbox07.dvcorp.rcis.com" task="5" />
+    <scheduledtask name="digitalsignaturerequestnotification" action="disable" computername="dvbox07.dvcorp.rcis.com" task="6" />
+    <scheduledtask name="documenttransfertokofax" action="disable" computername="dvbox07.dvcorp.rcis.com" task="7" />
+    <scheduledtask name="documentagencytransfer" action="disable" computername="dvbox07.dvcorp.rcis.com" task="8" />
+    <scheduledtask name="documentnotificationengine" action="disable" computername="dvbox07.dvcorp.rcis.com" task="9" />
+    <scheduledtask name="emailprintnowfilesseries" action="disable" computername="dvbox07.dvcorp.rcis.com" task="10" />
+    <scheduledtask name="filenetmetadataupdates" action="disable" computername="dvbox07.dvcorp.rcis.com" task="11" />
+    <scheduledtask name="importagencydocstofilenet" action="disable" computername="dvbox07.dvcorp.rcis.com" task="12" />
+    <scheduledtask name="importmetadata" action="disable" computername="dvbox07.dvcorp.rcis.com" task="13" />
+    <scheduledtask name="importsoldocumentswithemailsenabled" action="disable" computername="dvbox07.dvcorp.rcis.com" task="14" />
+    <scheduledtask name="policydocumentloadtofilenet" action="disable" computername="dvbox07.dvcorp.rcis.com" task="15" />
+    <scheduledtask name="policyextracttosecuretransport" action="disable" computername="dvbox07.dvcorp.rcis.com" task="16" />
+    <scheduledtask name="portalpolicycancellations" action="disable" computername="dvbox07.dvcorp.rcis.com" task="17" />
+    <scheduledtask name="produceraccountaccessupdates_prod" action="disable" computername="dvbox07.dvcorp.rcis.com" task="18" />
+    <scheduledtask name="spoolfileprocessing" action="disable" computername="dvbox07.dvcorp.rcis.com" task="19" />
+  </play>
+</playbook>

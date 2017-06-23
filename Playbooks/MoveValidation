@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="FIM_Enable" role="FIM" order="1" method="serial">		
+		<scheduledtask action="enable" name="Execute FIM Delta Sync Cycle"/>
+		<scheduledtask action="enable" name="Maintain Unique ID’s Verify SQL clusters"/>
+	</play>
+	<play name="VirtualCenter_Reboot" role="VirtualCenter" order="1" method="serial">		
+		<windows action="stop" name="VirtualCenter"/>
+		<windows action="start" name="VirtualCenter"/>
+	</play>
+	<play name="SASMeta_Start" role="SASMeta" order="1" method="serial">
+		<service action="start" name="SAS [SASConfig-Lev1] SAS Environment Manager Agent"/>		
+		<service action="start" name="SAS [SASConfig-Lev1] SASMeta – Metadata Server"/>		
+		<service action="start" name="SAS [Config-Lev1] httpd"/>		
+	</play>
+	<play name="SASCompute_Start" role="SASCompute" order="1" method="serial">
+		<service action="start" name="SAS [Config-Lev1] Cache Locator on port 41415"/>		
+		<service action="start" name="SAS[Config-Lev1]DIPJobRunner"/>		
+		<service action="start" name="SAS[Config-Lev1]httpd-WebServer"/>		
+        <service action="start" name="SAS [Config-Lev1] JMS Broker on port 61616"/>		
+		<service action="start" name="SAS [Config-Lev1] Object Spawner"/>		
+		<service action="start" name="SAS [Config-Lev1] SAS Environment Manager"/>				
+		<service action="start" name="SAS [Config-Lev1] SAS Environment Manager Agent"/>		
+		<service action="start" name="SAS [Config-Lev1] SASServer1_1 - WebAppServer"/>		
+		<service action="start" name="SAS [Config-Lev1] Web Infrastructure Platform Data Server"/>		
+		<service action="start" name="SAS Deployment Agent"/>				
+	</play>	
+	<play name="FedServerStartup" role="FedServers" method="serial">		
+		<service action="start" name="NetPipeActivator"/>
+		<service action="start" name="adfssrv"/>		
+	</play>
+	<play name="FedServerStartup" role="FedServers" method="serial">		
+		<service action="start" name="NetPipeActivator"/>
+		<service action="start" name="adfssrv"/>		
+	</play>
+	<play name="WAPStartup" role="WAPServers" method="serial">		
+		<service action="start" name="appproxysvc"/>
+		<service action="start" name="adfssrv"/>		
+	</play>	
+	<play name="HeatRestart" role="HeatServers" method="serial">		
+		<service action="stop" name="HeatWebUI"/>
+		<service action="start" name="HeatWebUI"/>
+	</play>	
+	<play name="CiQuoteBatchRestart" role="QTSchedServers" method="serial">		
+		<scheduledtask order="1" action="stop" name="CIQuote Batch Runner"/>
+		<process order="2" action="stop" name="FarmmapsBatchJobRunner"/>
+		<scheduledtask order="3" action="start" name="CIQuote Batch Runner"/>
+	</play>
+	<play name="MappingJobRunnerRestart" role="FMWebServers" method="serial">		
+		<scheduledtask order="1" action="stop" name="RCISMappingBatchJobRunner"/>
+		<scheduledtask order="2" action="start" name="RCISMappingBatchJobRunner"/>
+	</play>
+	
+	<play name="WebFarmStartup" role="WebServers" method="parallel">			
+		<iisapppool name=".NET v2.0"/>
+		<iisapppool name=".NET v2.0 Classic"/>
+		<iisapppool name=".NET v4.5"/>
+		<iisapppool name=".NET v4.5 Classic"/>
+		<iisapppool name=".NET v4.5 InfraEng"/>
+		<iisapppool name=".NET v4.5 Mobile"/>
+		<iisapppool name=".net v4.5 WebApp"/>
+		<iisapppool name=".NET v4.5 WebApp (32-bit)"/>
+		<iisapppool name=".Net v4.5 WebApp Isolation"/>
+		<iisapppool name=".net v4.5 websvc"/>
+		<iisapppool name=".NET v4.5 WebSvc (32-bit)"/>
+		<iisapppool name="CDN v4.0"/>
+		<iisapppool name="Claims v4.0 Classic (32-bit)"/>
+		<iisapppool name="Classic .NET AppPool"/>
+		<iisapppool name="DefaultAppPool"/>
+		<iisapppool name="Identity Services v2.0 Classic (32-bit)"/>
+		<iisapppool name="IntWebApp v2.0 Classic (32-bit)"/>
+		<iisapppool name="IntWebApp v4.0 Classic (32-bit)"/>
+		<iisapppool name="Quest Services v4.0 (32-bit)"/>
+		<iisapppool name="Quoting v4.0 Classic (32-bit)"/>
+		<iisapppool name="Services v2.0 Classic (32-bit)"/>
+		<iisapppool name="Services v4.0 Classic (32-bit)"/>
+	</play>
+	
+	<role name="FIM">
+		<server name="PDILM02.corp.RCIS.COM" order="1"/>
+	</role>
+	<role name="VirtualCenter">
+		<server name="pdvc1.corp.RCIS.COM" order="1"/>
+	</role>
+	<role name="SASMeta">
+		<server name="pdsasm02.corp.RCIS.COM" order="1"/>
+	</role>
+	<role name="SASCompute">
+		<server name="pdsasc02.corp.RCIS.COM" order="1"/>
+	</role>
+	<role name="FedServers">
+		<server name="pdfedsvr01.corp.rcis.com" order="1"/>
+		<server name="pdfedsvr02.corp.rcis.com" order="2"/>
+	</role>
+	<role name="WAPServers">
+		<server name="pdwap01.corp.rcis.com" order="1"/>
+		<server name="pdwap02.corp.rcis.com" order="2"/>
+	</role>
+	<role name="HeatServers">
+		<server name="pdheat03.corp.RCIS.COM" order="1"/>
+	</role>
+	<role name="QTSchedServers">
+		<server name="PDQTSCHD01.corp.RCIS.COM" order="1"/>
+		<server name="PDQTSCHD02.corp.RCIS.COM" order="2"/>
+		<server name="PDQTSCHD03.corp.RCIS.COM" order="3"/>
+	</role>
+	<role name="FMWebServers">
+		<server name="PDFMWEB05.corp.RCIS.COM" order="1"/>
+		<server name="PDFMWEB06.corp.RCIS.COM" order="2"/>
+		<server name="PDFMWEB07.corp.RCIS.COM" order="3"/>
+		<server name="TRFMWEB05.corp.RCIS.COM" order="4"/>
+		<server name="TRFMWEB06.corp.RCIS.COM" order="5"/>
+	</role>
+	<role name="WebServers">
+		<server name="PDWEB01.corp.RCIS.COM" order="1"/>
+		<server name="PDWEB02.corp.RCIS.COM" order="2"/>
+		<server name="PDWEB03.corp.RCIS.COM" order="3"/>
+		<server name="PDWEB04.corp.RCIS.COM" order="4"/>
+		<server name="PDWEB05.corp.RCIS.COM" order="5"/>
+		<server name="PDWEB06.corp.RCIS.COM" order="6"/>
+		<server name="PDWEB07.corp.RCIS.COM" order="7"/>
+		<server name="PDWEB08.corp.RCIS.COM" order="8"/>
+	</role>
+</playbook>
+

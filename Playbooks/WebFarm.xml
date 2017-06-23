@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="OfflineWebSites" role="webfarm">		
+		<IISSite action="stop" name="App"/>
+		<IISSite action="stop" name="CDN"/>
+		<IISSite action="stop" name="InfraEng"/>
+		<IISSite action="stop" name="IntWebApp"/>
+		<IISSite action="stop" name="IntWebSvc"/>
+		<IISSite action="stop" name="Mobile"/>
+		<IISSite action="stop" name="Svc"/>
+		<IISSite action="stop" name="Default Web Site"/>	
+	</play>
+	<play name="OnlineWebSites" role="webfarm">		
+		<IISSite action="start" name="App"/>
+		<IISSite action="start" name="CDN"/>
+		<IISSite action="start" name="InfraEng"/>
+		<IISSite action="start" name="IntWebApp"/>
+		<IISSite action="start" name="IntWebSvc"/>
+		<IISSite action="start" name="Mobile"/>
+		<IISSite action="start" name="Svc"/>
+		<IISSite action="start" name="Default Web Site"/>		
+	</play>
+		<play name="ShutdownAppPools" role="webfarm" method="parallel">		
+		<IISAppPool action="stop" name="CDN v4.0"/>
+		<IISAppPool action="stop" name="IntWebApp v4.0 Classic (32-bit)"/>
+		<IISAppPool action="stop" name=".NET v4.5 WebApp"/>
+		<IISAppPool action="stop" name="Services v4.0 Classic (32-bit)"/>
+		<IISAppPool action="stop" name=".NET v4.5 WebSvc"/>
+		<IISAppPool action="stop" name=".NET v4.5 InfraEng"/>
+		<IISAppPool action="stop" name=".NET v4.5"/>
+		<IISAppPool action="stop" name="Quest Services v4.0 (32-bit)"/>		
+	</play>
+	<play name="StartAppPools" role="webfarm" method="parallel" order="2,1">		
+		<IISAppPool action="start" name="CDN v4.0"/>
+		<IISAppPool action="start" name="IntWebApp v4.0 Classic (32-bit)"/>
+		<IISAppPool action="start" name=".NET v4.5 WebApp"/>
+		<IISAppPool action="start" name="Services v4.0 Classic (32-bit)"/>
+		<IISAppPool action="start" name=".NET v4.5 WebSvc"/>
+		<IISAppPool action="start" name=".NET v4.5 InfraEng"/>
+		<IISAppPool action="start" name=".NET v4.5"/>
+		<IISAppPool action="start" name="Quest Services v4.0 (32-bit)"/>
+		<server name="dvbox09.dvcorp.rcis.com" order="1"/>
+		<server name="dvbox08.dvcorp.rcis.com" order="2"/>
+		<IISAppPool action="start" name="CDN v4.0" computername="dvbox09/08" task="1"/>		
+	</play>
+	<play name="WebFarmServiceShutdown" role="webfarm">		
+		<service action="stop" name="w3svc"/>
+		<service action="disable" name="w3svc"/>
+	</play>
+	<play name="WebFarmServiceStartup" role="webfarm">		
+		<service action="enable" name="w3svc"/>
+		<service action="start" name="w3svc"/>
+		<Process name="IISRESET" action="start" commandline="iisreset.exe /start"/>
+	</play>
+	<play name="WebFarmServerStartup" role="webfarm" order="1,2" method="serial">
+		<Windows action="Start"/>	
+	</play>
+	<play name="WebFarmServerShutdown" role="webfarm" order="2,1" method="parallel">
+		<Windows action="stop"/>
+	</play>
+	<role name="webfarm">
+		<server name="dvbox09.dvcorp.rcis.com" order="1"/>
+		<server name="dvbox08.dvcorp.rcis.com" order="2"/>
+	</role>
+</playbook>
+

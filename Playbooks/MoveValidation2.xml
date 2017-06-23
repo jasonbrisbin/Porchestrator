@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<Playbook>
+	<Play Name="FIM_Enable" Role="FIM" Order="1" method="serial">		
+		<scheduledtask action="enable" Name="Execute FIM Delta Sync Cycle"/>
+		<scheduledtask action="enable" Name="Maintain Unique ID’s Verify SQL clusters"/>
+	</Play>	
+	<role name="FIM">
+		<server name="PDILM02.corp.RCIS.COM" order="1"/>
+	</role>
+</Playbook>
+

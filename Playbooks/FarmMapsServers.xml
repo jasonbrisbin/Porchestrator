@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<role name="FarmMapsServers">
+		<server name="DVBOX03.DVCORP.RCIS.COM" order="1"/>
+		<server name="DVBOX04.DVCORP.RCIS.COM" order="2"/>
+		<server name="DVBOX05.DVCORP.RCIS.COM" order="3"/>
+		<server name="DVBOX06.DVCORP.RCIS.COM" order="4"/>
+	</role>
+</playbook>
+

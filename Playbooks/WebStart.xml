@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTf-8" ?>
+<playbook>
+	<play name="StartAppPools" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\webfarm.xml"/>
+	<play name="OnlineWebSites" import="D:\git\Jason_Brisbin\Projects\StartStop\Playbooks\webfarm.xml"/>
+</playbook>
+

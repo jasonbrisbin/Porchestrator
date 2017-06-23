@@ -1,0 +1,10 @@
+D:\git\Jason_Brisbin\Projects\StartStop\duh\bin\Release\Duh.exe.config
+D:\git\Jason_Brisbin\Projects\StartStop\duh\bin\Release\Duh.exe
+D:\git\Jason_Brisbin\Projects\StartStop\duh\bin\Release\Duh.pdb
+D:\git\Jason_Brisbin\Projects\StartStop\duh\bin\Release\RCIS.Installer.RDM.Threading.dll
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.csprojResolveAssemblyReference.cache
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.ProjectInstaller.resources
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.Duh.resources
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.csproj.GenerateResource.Cache
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.exe
+D:\git\Jason_Brisbin\Projects\StartStop\duh\obj\Release\Duh.pdb
